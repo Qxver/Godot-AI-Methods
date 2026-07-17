@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c7bh2wiraubmw"]
+
+[node name="MainMenu" type="Control" unique_id=527965755]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=431229810]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=580048073]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.11119685, 0.11119684, 0.11119684, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1168482664]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Select Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=247622096]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -120.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
