@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dhmhpqnmx28xj"]
+
+[ext_resource type="Script" uid="uid://bwek5isktnwwq" path="res://Scripts/Enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://dai3urkfwfcfd" path="res://Assets/enemy_idle.png" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://daey1qn0h7vee" path="res://Scripts/StateMachine.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://ox3skftdy3fo" path="res://Scripts/EnemyIdle.gd" id="4_287tu"]
+[ext_resource type="Script" uid="uid://d068h7qj42i7f" path="res://Scripts/EnemyFollow.gd" id="5_0830c"]
+[ext_resource type="Script" uid="uid://dajdb21pyilmy" path="res://Scripts/DrawFollowStateRange.gd" id="6_ghaa6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
+radius = 15.033297
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_niw12"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=538431499]
+script = ExtResource("1_1f0kj")
+
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=92856035]
+unique_name_in_owner = true
+texture = ExtResource("1_hghv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=451376083]
+shape = SubResource("CircleShape2D_1pbdy")
+
+[node name="State Machine" type="Node" parent="." unique_id=1052966649 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_afpow")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" unique_id=1749004296 node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_287tu")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://ox3skftdy3fo"
+
+[node name="Follow" type="Node" parent="State Machine" unique_id=456534095 node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_0830c")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://d068h7qj42i7f"
+
+[node name="StateChangeRange" type="Area2D" parent="." unique_id=1409891071]
+script = ExtResource("6_ghaa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateChangeRange" unique_id=2051697660]
+shape = SubResource("CircleShape2D_niw12")
