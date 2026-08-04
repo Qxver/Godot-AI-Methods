@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ceau0i5xv6vld"]
+
+[ext_resource type="Script" uid="uid://cew0ka3nhcdqd" path="res://Scripts/Pathfinding/Enemy.gd" id="1_duxxi"]
+[ext_resource type="Texture2D" uid="uid://dai3urkfwfcfd" path="res://Assets/enemy_idle.png" id="2_bf1gu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
+radius = 15.033297
+
+[node name="Enemy" type="CharacterBody2D" unique_id=538431499]
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_duxxi")
+
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=92856035]
+unique_name_in_owner = true
+texture = ExtResource("2_bf1gu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=451376083]
+shape = SubResource("CircleShape2D_1pbdy")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1312738795]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="." unique_id=853929336]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

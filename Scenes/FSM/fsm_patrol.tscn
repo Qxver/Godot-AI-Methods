@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://sqqrhu5h8ukb"]
 
-[ext_resource type="PackedScene" uid="uid://btf84tdwoo8pv" path="res://Scenes/player.tscn" id="1_player"]
-[ext_resource type="PackedScene" uid="uid://dhmhpqnmx28xj" path="res://Scenes/enemy.tscn" id="2_enemy"]
+[ext_resource type="PackedScene" uid="uid://btf84tdwoo8pv" path="res://Scenes/FSM/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://dhmhpqnmx28xj" path="res://Scenes/FSM/enemy.tscn" id="2_enemy"]
 
 [node name="FSM_Patrol" type="Node2D" unique_id=540917779]
 
