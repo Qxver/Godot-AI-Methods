@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cvn2osbufp61d"]
+
+[ext_resource type="Script" uid="uid://djl4mtj0pemgi" path="res://Scripts/maze_generator.gd" id="1_84mm7"]
+[ext_resource type="Texture2D" uid="uid://cfiqkdey8guys" path="res://Assets/tiles_pathfinding.png" id="2_lpaq3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gpral"]
+texture = ExtResource("2_lpaq3")
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_01wfl"]
+sources/0 = SubResource("TileSetAtlasSource_gpral")
+
+[node name="MazeGenerator" type="Node2D" unique_id=1156107029]
+script = ExtResource("1_84mm7")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1950535533]
+tile_set = SubResource("TileSet_01wfl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=431229811]
+
+[node name="RandomizeButton" type="Button" parent="CanvasLayer" unique_id=774805046]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 100.0
+grow_vertical = 0
+text = "Randomize"
+
+[connection signal="pressed" from="CanvasLayer/RandomizeButton" to="." method="_on_randomize_button_pressed"]

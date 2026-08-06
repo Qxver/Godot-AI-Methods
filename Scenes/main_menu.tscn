@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://c7bh2wiraubmw"]
 
+[ext_resource type="Script" uid="uid://co3a7dn7y5sed" path="res://Scripts/main_menu.gd" id="1_28flt"]
+
 [node name="MainMenu" type="Control" unique_id=527965755]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_28flt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=431229810]
 
@@ -25,16 +28,36 @@ text = "Select Stage"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=247622096]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1357343131]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -120.0
-offset_right = 320.0
-offset_bottom = 180.0
+offset_left = -125.0
+offset_top = -40.0
+offset_right = 125.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="FSMButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=731540017]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Finite State Machine"
+
+[node name="PathfindingButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1055374987]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Pathfinding"
+
+[node name="GenerationButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1362645492]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Procedural generation"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/FSMButton" to="." method="_on_fsm_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PathfindingButton" to="." method="_on_pathfinding_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/GenerationButton" to="." method="_on_generation_button_pressed"]
