@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bnso33130x8q6"]
+
+[ext_resource type="Script" uid="uid://023t21t1foq3" path="res://Scripts/FSM/Player.gd" id="1_sl1g7"]
+[ext_resource type="Texture2D" uid="uid://13bxagiko1sy" path="res://Assets/player.png" id="2_iea16"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_niw12"]
+radius = 15.132746
+
+[node name="Player" type="CharacterBody2D" unique_id=373087255 groups=["Player"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_sl1g7")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=253027865]
+texture = ExtResource("2_iea16")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1123601560]
+shape = SubResource("CircleShape2D_niw12")

@@ -1,14 +1,25 @@
 [gd_scene format=3 uid="uid://cvn2osbufp61d"]
 
-[ext_resource type="Script" uid="uid://djl4mtj0pemgi" path="res://Scripts/maze_generator.gd" id="1_84mm7"]
+[ext_resource type="Script" uid="uid://djl4mtj0pemgi" path="res://Scripts/Generation/maze_generator.gd" id="1_84mm7"]
 [ext_resource type="Texture2D" uid="uid://cfiqkdey8guys" path="res://Assets/tiles_pathfinding.png" id="2_lpaq3"]
+[ext_resource type="PackedScene" uid="uid://bnso33130x8q6" path="res://Scenes/Generation/player.tscn" id="3_84mm7"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_84mm7"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gpral"]
 texture = ExtResource("2_lpaq3")
 0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_84mm7")
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_01wfl"]
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_gpral")
 
 [node name="MazeGenerator" type="Node2D" unique_id=1156107029]
@@ -27,5 +38,9 @@ offset_top = -31.0
 offset_right = 100.0
 grow_vertical = 0
 text = "Randomize"
+
+[node name="Player" parent="." unique_id=373087255 instance=ExtResource("3_84mm7")]
+position = Vector2(16, 16)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="CanvasLayer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
