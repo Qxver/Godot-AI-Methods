@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvn2osbufp61d"]
 
-[ext_resource type="Script" uid="uid://djl4mtj0pemgi" path="res://Scripts/Generation/maze_generator.gd" id="1_84mm7"]
+[ext_resource type="Script" uid="uid://dhiibebv14233" path="res://Scripts/Generation/maze_generator.gd" id="1_84mm7"]
 [ext_resource type="Texture2D" uid="uid://cfiqkdey8guys" path="res://Assets/tiles_pathfinding.png" id="2_lpaq3"]
 [ext_resource type="PackedScene" uid="uid://bnso33130x8q6" path="res://Scenes/Generation/player.tscn" id="3_84mm7"]
 
@@ -39,8 +39,21 @@ offset_right = 100.0
 grow_vertical = 0
 text = "Randomize"
 
+[node name="BackButton" type="Button" parent="CanvasLayer" unique_id=284665197]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
 [node name="Player" parent="." unique_id=373087255 instance=ExtResource("3_84mm7")]
 position = Vector2(16, 16)
 scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="CanvasLayer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_back_button_pressed"]

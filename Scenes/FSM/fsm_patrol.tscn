@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://sqqrhu5h8ukb"]
 
+[ext_resource type="Script" uid="uid://coja78turfcu5" path="res://Scripts/FSM/fsm_patrol.gd" id="1_21y0p"]
 [ext_resource type="PackedScene" uid="uid://btf84tdwoo8pv" path="res://Scenes/FSM/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://dhmhpqnmx28xj" path="res://Scenes/FSM/enemy.tscn" id="2_enemy"]
 
 [node name="FSM_Patrol" type="Node2D" unique_id=540917779]
+script = ExtResource("1_21y0p")
 
 [node name="Player" parent="." unique_id=425882755 instance=ExtResource("1_player")]
 position = Vector2(200, 200)
 
 [node name="Enemy" parent="." unique_id=1580251887 instance=ExtResource("2_enemy")]
 position = Vector2(478, 163)
+
+[node name="BackButton" type="Button" parent="." unique_id=186715672]
+offset_right = 85.0
+offset_bottom = 31.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

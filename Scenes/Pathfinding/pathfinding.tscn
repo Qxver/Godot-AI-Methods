@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://c4esnch323ofn"]
 
+[ext_resource type="Script" uid="uid://bgidku48lqhii" path="res://Scripts/Pathfinding/pathfinding.gd" id="1_a53hr"]
 [ext_resource type="TileSet" uid="uid://dal70q5uo1bx2" path="res://Assets/tile_set_pathfinding.tres" id="1_lu3dr"]
 [ext_resource type="PackedScene" uid="uid://btf84tdwoo8pv" path="res://Scenes/FSM/player.tscn" id="2_dxnmq"]
 [ext_resource type="PackedScene" uid="uid://ceau0i5xv6vld" path="res://Scenes/Pathfinding/enemy.tscn" id="3_2lktl"]
 [ext_resource type="Script" uid="uid://csku0aevwodlt" path="res://Scripts/Pathfinding/Player.gd" id="3_lu3dr"]
 
 [node name="Pathfinding" type="Node2D" unique_id=1672560043]
+script = ExtResource("1_a53hr")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=475680097]
 tile_set = ExtResource("1_lu3dr")
@@ -20,3 +22,16 @@ script = ExtResource("3_lu3dr")
 [node name="Enemy" parent="." unique_id=538431499 node_paths=PackedStringArray("player") instance=ExtResource("3_2lktl")]
 position = Vector2(590, 302)
 player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1572327872]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1876929211]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
