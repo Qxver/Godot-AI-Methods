@@ -1,5 +1,7 @@
 extends Node2D
 
+signal maze_generated
+
 @onready var tileMap = $TileMapLayer
 
 const ROWS = 40
@@ -22,7 +24,7 @@ func reset_maze():
 			row.append(1)
 		maze.append(row)
 	
-	
+
 func generate_maze():
 	reset_maze()
 	
@@ -31,10 +33,10 @@ func generate_maze():
 	maze[start_row][start_col] = 0
 	
 	make_path(start_row, start_col)
-	print(maze)
 	draw_maze()
+	emit_signal("maze_generated")
 	
-	
+
 func make_path(row, col):
 	var directions = [
 		[-2, 0], # up
@@ -61,7 +63,7 @@ func make_path(row, col):
 			
 			make_path(new_row, new_col)
 		
-	
+
 	
 func draw_maze():
 	tileMap.clear()
@@ -70,6 +72,18 @@ func draw_maze():
 		for col in range(COLS):
 			var tile_type = WALL if maze[row][col] == 0 else PATH
 			tileMap.set_cell(Vector2i(row, col), 0, tile_type)
+
+
+func get_random_open_cell() -> Vector2:
+	var open_cells: Array[Vector2i] = []
+	for row in range(ROWS):
+		for col in range(COLS):
+			if maze[row][col] == 1:
+				open_cells.append(Vector2i(row, col))
+	if open_cells.is_empty():
+		return Vector2.ZERO
+	var cell = open_cells[randi() % open_cells.size()]
+	return tileMap.map_to_local(cell)
 
 
 func _on_randomize_button_pressed() -> void:
