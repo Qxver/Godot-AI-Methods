@@ -48,16 +48,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Finite State Machine"
 
-[node name="PathfindingButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1055374987]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Pathfinding"
-
 [node name="GenerationButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1362645492]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Procedural generation"
 
+[node name="PathfindingButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1055374987]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Pathfinding"
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/FSMButton" to="." method="_on_fsm_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/PathfindingButton" to="." method="_on_pathfinding_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/GenerationButton" to="." method="_on_generation_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PathfindingButton" to="." method="_on_pathfinding_button_pressed"]
