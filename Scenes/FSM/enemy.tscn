@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bs6cb3pyjcc1v" path="res://Scripts/FSM/EnemyIdle.gd" id="4_287tu"]
 [ext_resource type="Script" uid="uid://dywi817qt8t48" path="res://Scripts/FSM/EnemyFollow.gd" id="5_0830c"]
 [ext_resource type="Script" uid="uid://dajdb21pyilmy" path="res://Scripts/FSM/DrawFollowStateRange.gd" id="6_draw"]
+[ext_resource type="Script" path="res://Scripts/FSM/EnemyAttack.gd" id="7_attack"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
 radius = 15.033297
@@ -36,8 +37,13 @@ enemy = NodePath("../..")
 script = ExtResource("5_0830c")
 enemy = NodePath("../..")
 
+[node name="Attack" type="Node" parent="State Machine" unique_id=987654321 node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_attack")
+enemy = NodePath("../..")
+
 [node name="StateChangeRange" type="Area2D" parent="." unique_id=1409891071]
 script = ExtResource("6_draw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateChangeRange" unique_id=2051697660]
 shape = SubResource("CircleShape2D_niw12")
+

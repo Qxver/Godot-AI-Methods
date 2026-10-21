@@ -18,7 +18,4 @@ offset_right = 85.0
 offset_bottom = 31.0
 text = "Back"
 
-[node name="Enemy2" parent="." unique_id=538431499 instance=ExtResource("2_enemy")]
-position = Vector2(545, 314)
-
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
