@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dl55lg4eratgl"]
+
+[ext_resource type="Texture2D" uid="uid://cvsj7fu8s0rpe" path="res://Assets/Cute_Fantasy_Free/Outdoor decoration/Oak_Tree.png" id="1_6b245"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
+radius = 10.049875
+
+[node name="Tree" type="StaticBody2D" unique_id=1747091308]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=7013914]
+shape = SubResource("CircleShape2D_1pbdy")
+
+[node name="OakTree" type="Sprite2D" parent="." unique_id=366112988]
+position = Vector2(0, -18)
+texture = ExtResource("1_6b245")

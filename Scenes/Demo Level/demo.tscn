@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dm26p1lgmy3jm"]
+
+[ext_resource type="Texture2D" uid="uid://cpjlpu5mnisu" path="res://Assets/Cute_Fantasy_Free/Tiles/Grass_Middle.png" id="1_gpeg6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
+
+[node name="Demo" type="Node2D" unique_id=1978375532]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1629908073]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_gpeg6")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=638648467]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=160827088]
+shape = SubResource("CircleShape2D_1pbdy")
