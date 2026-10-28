@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bearsf47iue7p"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1020978857]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1160246819]

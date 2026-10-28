@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cxpec72ycmnqn"]
+
+[ext_resource type="Texture2D" uid="uid://bk6i71ndn1cvr" path="res://Assets/Cute_Fantasy_Free/Outdoor decoration/Outdoor_Decor_Free.png" id="1_kbl5n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
+radius = 8.062258
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1689975695]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2090764608]
+shape = SubResource("CircleShape2D_1pbdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1770984298]
+texture = ExtResource("1_kbl5n")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
