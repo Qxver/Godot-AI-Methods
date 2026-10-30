@@ -423,7 +423,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_niw12"]
 radius = 9.055386
 
-[node name="Player" type="CharacterBody2D" unique_id=659419333]
+[node name="Player" type="CharacterBody2D" unique_id=659419333 groups=["Player"]]
 script = ExtResource("2_ojrcx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1903764991]

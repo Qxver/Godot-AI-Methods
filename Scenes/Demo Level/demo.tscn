@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dm26p1lgmy3jm"]
 
 [ext_resource type="Texture2D" uid="uid://cpjlpu5mnisu" path="res://Assets/Cute_Fantasy_Free/Tiles/Grass_Middle.png" id="1_gpeg6"]
+[ext_resource type="PackedScene" uid="uid://bqut6y65qysff" path="res://Scenes/Demo Level/player.tscn" id="2_rfaqi"]
+[ext_resource type="PackedScene" uid="uid://bearsf47iue7p" path="res://Scenes/Demo Level/enemy.tscn" id="3_0xpy4"]
 
 [node name="Demo" type="Node2D" unique_id=1978375532]
 
@@ -8,3 +10,9 @@
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("1_gpeg6")
+
+[node name="Player" parent="TextureRect" unique_id=659419333 instance=ExtResource("2_rfaqi")]
+position = Vector2(274, 290)
+
+[node name="Enemy" parent="." unique_id=1020978857 instance=ExtResource("3_0xpy4")]
+position = Vector2(275, 63)
