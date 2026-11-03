@@ -423,6 +423,30 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_niw12"]
 radius = 9.055386
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xpy4"]
+bg_color = Color(0.11119685, 0.11119685, 0.11119678, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.043137256, 0.043137256, 0.043137256, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hmyl"]
+bg_color = Color(0.7294118, 0.047058824, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.04303915, 0.043039165, 0.04303909, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="Player" type="CharacterBody2D" unique_id=659419333 groups=["Player"]]
 script = ExtResource("2_ojrcx")
 
@@ -433,3 +457,21 @@ animation = &"Death"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=94044066]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_niw12")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=716996775]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -16.0
+offset_right = 63.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+theme_override_styles/background = SubResource("StyleBoxFlat_0xpy4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8hmyl")
+value = 100.0
+show_percentage = false

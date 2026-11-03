@@ -10,6 +10,10 @@ extends CharacterBody2D
 @export var pause_min_time : float = 0.5  
 @export var pause_max_time : float = 1.5   
 
+@export var attack_damage  : int   = 10
+@export var attack_cooldown: float = 1.0
+
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 enum EnemyState { IDLE, FOLLOW, ATTACK, DEATH }
@@ -23,6 +27,9 @@ var pause_timer      : float = 0.0
 var is_pausing       : bool  = false
 
 var is_dead : bool = false
+
+var _attack_timer: float = 0.0
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
@@ -76,7 +83,7 @@ func _update_idle(delta: float) -> void:
 		if wander_timer <= 0.0:
 			_start_pause()
 
-		_play_walk_or_idle_anim(velocity, "Idle")
+		_play_animation(velocity, "Idle")
 
 	if player and _dist_to_player() < detect_range:
 		_transition(EnemyState.FOLLOW)
@@ -94,7 +101,7 @@ func _update_follow(delta: float) -> void:
 	var dir := (player.global_position - global_position).normalized()
 	velocity = dir * chase_speed
 
-	_play_walk_or_idle_anim(velocity, "Idle")
+	_play_animation(velocity, "Idle")
 
 	var dist := _dist_to_player()
 
@@ -106,18 +113,27 @@ func _update_follow(delta: float) -> void:
 
 func _enter_attack() -> void:
 	velocity = Vector2.ZERO
-	_play_attack_anim()
+	_play_attack_animation()
 
 
-func _update_attack(_delta: float) -> void:
+
+
+func _update_attack(delta: float) -> void:
 	if not player:
 		_transition(EnemyState.IDLE)
 		return
 
 	velocity = Vector2.ZERO
 
+	_attack_timer -= delta
+	if _attack_timer <= 0.0:
+		_attack_timer = attack_cooldown
+		if player.has_method("take_damage"):
+			player.take_damage(attack_damage)
+
 	if _dist_to_player() > attack_range * 1.2:
 		_transition(EnemyState.FOLLOW)
+
 
 
 func die() -> void:
@@ -148,8 +164,7 @@ func _transition(new_state: EnemyState) -> void:
 			_enter_attack()
 
 
-# Animations
-func _play_walk_or_idle_anim(vel: Vector2, idle_prefix: String) -> void:
+func _play_animation(vel: Vector2, idle_prefix: String) -> void:
 	var walk_prefix := "Walk"
 
 	if vel.length() < 1.0:
@@ -180,7 +195,7 @@ func _play_directional(prefix: String, dir: Vector2 = Vector2.ZERO) -> void:
 		sprite.play(anim_name)
 
 
-func _play_attack_anim() -> void:
+func _play_attack_animation() -> void:
 	if not player:
 		return
 

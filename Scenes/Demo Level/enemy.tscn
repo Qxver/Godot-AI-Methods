@@ -424,6 +424,7 @@ animations = [{
 radius = 9.055386
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1020978857]
+motion_mode = 1
 script = ExtResource("1_kyjag")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1160246819]
