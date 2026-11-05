@@ -12,9 +12,15 @@ extends CharacterBody2D
 
 @export var attack_damage  : int   = 10
 @export var attack_cooldown: float = 1.0
+@export var max_hp         : int   = 50
 
+@onready var sprite     : AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_bar : ProgressBar      = $HealthBar
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+var current_hp : int
+
+var _hit_flash_timer  : float = 0.0
+const HIT_FLASH_DURATION : float = 0.15
 
 enum EnemyState { IDLE, FOLLOW, ATTACK, DEATH }
 
@@ -32,12 +38,22 @@ var _attack_timer: float = 0.0
 
 
 func _ready() -> void:
+	current_hp = max_hp
+	add_to_group("Enemy")
+	health_bar.max_value = max_hp
+	health_bar.value     = max_hp
+	sprite.sprite_frames.set_animation_loop("Death", false)
 	player = get_tree().get_first_node_in_group("Player")
 	sprite.play("IdleDown")
 	_enter_idle()
 
 
 func _physics_process(delta: float) -> void:
+	if _hit_flash_timer > 0.0:
+		_hit_flash_timer -= delta
+		if _hit_flash_timer <= 0.0:
+			sprite.modulate = Color.WHITE
+
 	if is_dead:
 		return
 
@@ -136,16 +152,33 @@ func _update_attack(delta: float) -> void:
 
 
 
+func take_damage(amount: int) -> void:
+	if is_dead:
+		return
+	current_hp -= amount
+	current_hp = max(current_hp, 0)
+	health_bar.value = current_hp
+
+	sprite.modulate = Color(1.0, 0.25, 0.25)
+	_hit_flash_timer = HIT_FLASH_DURATION
+
+	if current_hp <= 0:
+		die()
+
+
 func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
 	velocity = Vector2.ZERO
+	sprite.modulate = Color.WHITE
 	sprite.play("Death")
-	sprite.animation_finished.connect(_on_death_animation_finished)
+	if not sprite.animation_finished.is_connected(_on_death_animation_finished):
+		sprite.animation_finished.connect(_on_death_animation_finished)
 
 
 func _on_death_animation_finished() -> void:
+	await get_tree().create_timer(5.0).timeout
 	queue_free()
 
 
