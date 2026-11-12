@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://cpjlpu5mnisu" path="res://Assets/Cute_Fantasy_Free/Tiles/Grass_Middle.png" id="1_gpeg6"]
 [ext_resource type="PackedScene" uid="uid://bqut6y65qysff" path="res://Scenes/Demo Level/player.tscn" id="2_rfaqi"]
 [ext_resource type="PackedScene" uid="uid://bearsf47iue7p" path="res://Scenes/Demo Level/enemy.tscn" id="3_0xpy4"]
+[ext_resource type="Script" uid="uid://dmimubixwsgth" path="res://Scripts/Demo Level/procedural_generation.gd" id="4_spawner"]
+[ext_resource type="PackedScene" uid="uid://cxpec72ycmnqn" path="res://Scenes/Demo Level/rock.tscn" id="5_rock"]
+[ext_resource type="PackedScene" uid="uid://dl55lg4eratgl" path="res://Scenes/Demo Level/tree.tscn" id="6_tree"]
+[ext_resource type="PackedScene" uid="uid://xin0ndoqn68q" path="res://Scenes/Demo Level/fence.tscn" id="7_fence"]
 
 [node name="Demo" type="Node2D" unique_id=1978375532]
 
@@ -16,3 +20,9 @@ position = Vector2(274, 290)
 
 [node name="Enemy" parent="." unique_id=1020978857 instance=ExtResource("3_0xpy4")]
 position = Vector2(275, 63)
+
+[node name="ProceduralSpawner" type="Node2D" parent="." unique_id=1234567890]
+script = ExtResource("4_spawner")
+rock_scene = ExtResource("5_rock")
+tree_scene = ExtResource("6_tree")
+fence_scene = ExtResource("7_fence")

@@ -421,7 +421,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_niw12"]
-radius = 9.055386
+radius = 7.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xpy4"]
 bg_color = Color(0.11119685, 0.11119685, 0.11119678, 1)
@@ -450,14 +450,13 @@ corner_radius_bottom_left = 4
 [node name="Player" type="CharacterBody2D" unique_id=659419333 groups=["Player"]]
 script = ExtResource("2_ojrcx")
 attack_range = 30.0
-attack_speed_scale = 1.75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1903764991]
 sprite_frames = SubResource("SpriteFrames_niw12")
 animation = &"Death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=94044066]
-position = Vector2(0, -1)
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_niw12")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=716996775]

@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://bk6i71ndn1cvr" path="res://Assets/Cute_Fantasy_Free/Outdoor decoration/Outdoor_Decor_Free.png" id="1_kbl5n"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1pbdy"]
-radius = 8.062258
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbl5n"]
+size = Vector2(12, 13)
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=1689975695]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2090764608]
-shape = SubResource("CircleShape2D_1pbdy")
+shape = SubResource("RectangleShape2D_kbl5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1770984298]
 texture = ExtResource("1_kbl5n")
