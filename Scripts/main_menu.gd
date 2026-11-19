@@ -12,3 +12,7 @@ func _on_pathfinding_button_pressed() -> void:
 		
 func _on_generation_button_pressed() -> void:
 		get_tree().change_scene_to_file("res://Scenes/Generation/MazeGenerator.tscn")
+
+
+func _on_demo_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Demo Level/demo.tscn")

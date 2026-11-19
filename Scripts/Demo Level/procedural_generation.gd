@@ -5,15 +5,17 @@
 extends Node2D
 
 # ── Scenes to spawn ──────────────────────────────────────────────────────────
-@export var rock_scene:  PackedScene
-@export var tree_scene:  PackedScene
-@export var fence_scene: PackedScene
+@export var rock_scene:           PackedScene
+@export var tree_scene:           PackedScene
+@export var fence_scene:          PackedScene
+@export var fence_vertical_scene: PackedScene
 
 # ── Quantity controls ─────────────────────────────────────────────────────────
 @export_group("Spawn Counts")
-@export var rock_count:  int = 10
-@export var tree_count:  int = 8
-@export var fence_count: int = 2
+@export var rock_count:           int = 10
+@export var tree_count:           int = 8
+@export var fence_count:          int = 2
+@export var fence_vertical_count: int = 2
 
 # ── Placement rules ───────────────────────────────────────────────────────────
 @export_group("Placement Rules")
@@ -57,9 +59,10 @@ func _ready() -> void:
 		_player_start = (players[0] as Node2D).global_position
 
 	# Spawn all object types
-	_spawn_batch(rock_scene,  rock_count,  "Rocks")
-	_spawn_batch(tree_scene,  tree_count,  "Trees")
-	_spawn_batch(fence_scene, fence_count, "Fences")
+	_spawn_batch(rock_scene,           rock_count,           "Rocks")
+	_spawn_batch(tree_scene,           tree_count,           "Trees")
+	_spawn_batch(fence_scene,          fence_count,          "Fences")
+	_spawn_batch(fence_vertical_scene, fence_vertical_count, "FencesVertical")
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────

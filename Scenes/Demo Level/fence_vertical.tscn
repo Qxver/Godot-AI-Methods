@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c1hxf8eyix1sh"]
+
+[ext_resource type="Texture2D" uid="uid://cojc6txffowod" path="res://Assets/Cute_Fantasy_Free/Outdoor decoration/Fences.png" id="1_pkeli"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pbdy"]
+size = Vector2(6, 42)
+
+[node name="FenceVertical" type="StaticBody2D" unique_id=1083639860]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1316470678]
+shape = SubResource("RectangleShape2D_1pbdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1716853096]
+texture = ExtResource("1_pkeli")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)

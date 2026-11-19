@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_bar: ProgressBar = $HealthBar
 
+@export var move_speed: int = 100
 @export var max_hp: int = 100
 @export var attack_damage: int = 10
 @export var attack_range: float = 20.0
@@ -50,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		"move_down"
 	)
 
-	velocity = direction * 100.0
+	velocity = direction * move_speed
 	move_and_slide()
 
 	_update_animation(direction)

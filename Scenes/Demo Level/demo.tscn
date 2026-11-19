@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cxpec72ycmnqn" path="res://Scenes/Demo Level/rock.tscn" id="5_rock"]
 [ext_resource type="PackedScene" uid="uid://dl55lg4eratgl" path="res://Scenes/Demo Level/tree.tscn" id="6_tree"]
 [ext_resource type="PackedScene" uid="uid://xin0ndoqn68q" path="res://Scenes/Demo Level/fence.tscn" id="7_fence"]
+[ext_resource type="Script" uid="uid://blptgomk8obn7" path="res://Scripts/Demo Level/demo.gd" id="8_ekntc"]
+[ext_resource type="PackedScene" uid="uid://c1hxf8eyix1sh" path="res://Scenes/Demo Level/fence_vertical.tscn" id="8_fvertical"]
 
 [node name="Demo" type="Node2D" unique_id=1978375532]
 
@@ -26,3 +28,21 @@ script = ExtResource("4_spawner")
 rock_scene = ExtResource("5_rock")
 tree_scene = ExtResource("6_tree")
 fence_scene = ExtResource("7_fence")
+fence_vertical_scene = ExtResource("8_fvertical")
+
+[node name="BackButton" type="Button" parent="." unique_id=1436041818]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 555.0
+offset_top = 329.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+script = ExtResource("8_ekntc")
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
