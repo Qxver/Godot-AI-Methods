@@ -10,6 +10,19 @@
 [ext_resource type="Script" uid="uid://blptgomk8obn7" path="res://Scripts/Demo Level/demo.gd" id="8_ekntc"]
 [ext_resource type="PackedScene" uid="uid://c1hxf8eyix1sh" path="res://Scenes/Demo Level/fence_vertical.tscn" id="8_fvertical"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vjycx"]
+b = Vector2(641, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qjiao"]
+b = Vector2(640, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_left"]
+b = Vector2(0, 360)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_right"]
+a = Vector2(640, 0)
+b = Vector2(640, 360)
+
 [node name="Demo" type="Node2D" unique_id=1978375532]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1629908073]
@@ -44,5 +57,25 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
 script = ExtResource("8_ekntc")
+
+[node name="WorldBorder" type="StaticBody2D" parent="." unique_id=583505686]
+
+[node name="CollisionShape2DUp" type="CollisionShape2D" parent="WorldBorder" unique_id=1363158272]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("SegmentShape2D_vjycx")
+
+[node name="CollisionShape2D2Down" type="CollisionShape2D" parent="WorldBorder" unique_id=1258972252]
+visible = false
+position = Vector2(0, 361)
+shape = SubResource("SegmentShape2D_qjiao")
+
+[node name="CollisionShape2DLeft" type="CollisionShape2D" parent="WorldBorder" unique_id=1111111111]
+visible = false
+shape = SubResource("SegmentShape2D_left")
+
+[node name="CollisionShape2DRight" type="CollisionShape2D" parent="WorldBorder" unique_id=-2072745074]
+visible = false
+shape = SubResource("SegmentShape2D_right")
 
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]

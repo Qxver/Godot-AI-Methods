@@ -1,16 +1,10 @@
-## ProceduralSpawner
-## Procedurally places rocks, trees, and fences across the demo level.
-## Objects are scattered randomly but are guaranteed to keep a minimum
-## separation from each other and from the player's spawn position.
 extends Node2D
 
-# ── Scenes to spawn ──────────────────────────────────────────────────────────
 @export var rock_scene:           PackedScene
 @export var tree_scene:           PackedScene
 @export var fence_scene:          PackedScene
 @export var fence_vertical_scene: PackedScene
 
-# ── Quantity controls ─────────────────────────────────────────────────────────
 @export_group("Spawn Counts")
 @export var rock_count:           int = 10
 @export var tree_count:           int = 8
@@ -40,7 +34,7 @@ extends Node2D
 
 # ── Internal state ────────────────────────────────────────────────────────────
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var _placed_positions: Array[Vector2] = []
+var _placed_positions: Array = []
 
 ## Position of the player node at startup; populated in _ready.
 var _player_start: Vector2 = Vector2(-9999, -9999)
