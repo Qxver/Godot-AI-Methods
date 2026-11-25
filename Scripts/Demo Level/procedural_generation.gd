@@ -1,5 +1,7 @@
 extends Node2D
 
+signal spawning_done
+
 @export var rock_scene:           PackedScene
 @export var tree_scene:           PackedScene
 @export var fence_scene:          PackedScene
@@ -58,6 +60,8 @@ func _ready() -> void:
 	_spawn_batch(fence_scene,          fence_count,          "Fences")
 	_spawn_batch(fence_vertical_scene, fence_vertical_count, "FencesVertical")
 
+	spawning_done.emit()
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -83,6 +87,7 @@ func _spawn_batch(scene: PackedScene, count: int, group_name: String) -> void:
 		var instance: Node2D = scene.instantiate()
 		container.add_child(instance)
 		instance.position = pos
+		instance.add_to_group("navigation_obstacle")
 
 		if randomise_rotation:
 			instance.rotation = _rng.randf_range(0.0, TAU)

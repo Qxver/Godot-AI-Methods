@@ -10,6 +10,15 @@
 [ext_resource type="Script" uid="uid://blptgomk8obn7" path="res://Scripts/Demo Level/demo.gd" id="8_ekntc"]
 [ext_resource type="PackedScene" uid="uid://c1hxf8eyix1sh" path="res://Scenes/Demo Level/fence_vertical.tscn" id="8_fvertical"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_demo"]
+vertices = PackedVector2Array(0, 0, 640, 0, 640, 360, 0, 360)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 640, 0, 640, 360, 0, 360)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 0
+agent_radius = 10.0
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vjycx"]
 b = Vector2(641, 0)
 
@@ -24,6 +33,7 @@ a = Vector2(640, 0)
 b = Vector2(640, 360)
 
 [node name="Demo" type="Node2D" unique_id=1978375532]
+script = ExtResource("8_ekntc")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1629908073]
 offset_right = 640.0
@@ -34,7 +44,13 @@ texture = ExtResource("1_gpeg6")
 position = Vector2(274, 290)
 
 [node name="Enemy" parent="." unique_id=1020978857 instance=ExtResource("3_0xpy4")]
-position = Vector2(275, 63)
+position = Vector2(126, 58)
+
+[node name="Enemy2" parent="." unique_id=511949892 instance=ExtResource("3_0xpy4")]
+position = Vector2(321, 56)
+
+[node name="Enemy3" parent="." unique_id=1520743533 instance=ExtResource("3_0xpy4")]
+position = Vector2(525, 59)
 
 [node name="ProceduralSpawner" type="Node2D" parent="." unique_id=1234567890]
 script = ExtResource("4_spawner")
@@ -56,7 +72,10 @@ offset_bottom = 360.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
-script = ExtResource("8_ekntc")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=234567890]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_demo")
 
 [node name="WorldBorder" type="StaticBody2D" parent="." unique_id=583505686]
 
@@ -78,4 +97,4 @@ shape = SubResource("SegmentShape2D_left")
 visible = false
 shape = SubResource("SegmentShape2D_right")
 
-[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -476,3 +476,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_kyjag")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b5uc2")
 value = 100.0
 show_percentage = false
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=712384651]
+debug_enabled = true
+
+[node name="NavTimer" type="Timer" parent="." unique_id=812384651]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]

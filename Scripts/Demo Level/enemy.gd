@@ -16,6 +16,7 @@ extends CharacterBody2D
 
 @onready var sprite     : AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_bar : ProgressBar      = $HealthBar
+@onready var nav_agent  : NavigationAgent2D = $NavigationAgent2D
 
 var current_hp : int
 
@@ -106,7 +107,12 @@ func _update_idle(delta: float) -> void:
 
 
 func _enter_follow() -> void:
-	pass
+	_refresh_nav_path()
+
+
+func _refresh_nav_path() -> void:
+	if player:
+		nav_agent.target_position = player.global_position
 
 
 func _update_follow(delta: float) -> void:
@@ -114,17 +120,23 @@ func _update_follow(delta: float) -> void:
 		_transition(EnemyState.IDLE)
 		return
 
-	var dir := (player.global_position - global_position).normalized()
-	velocity = dir * chase_speed
-
-	_play_animation(velocity, "Idle")
-
 	var dist := _dist_to_player()
 
 	if dist > lose_range:
 		_transition(EnemyState.IDLE)
+		return
 	elif dist < attack_range:
 		_transition(EnemyState.ATTACK)
+		return
+
+	if nav_agent.is_navigation_finished():
+		velocity = Vector2.ZERO
+	else:
+		var next_pos := nav_agent.get_next_path_position()
+		var dir := to_local(next_pos).normalized()
+		velocity = dir * chase_speed
+
+	_play_animation(velocity, "Idle")
 
 
 func _enter_attack() -> void:
@@ -182,10 +194,14 @@ func _on_death_animation_finished() -> void:
 	queue_free()
 
 
+func _on_nav_timer_timeout() -> void:
+	if current_state == EnemyState.FOLLOW:
+		_refresh_nav_path()
+
+
 func _transition(new_state: EnemyState) -> void:
 	if new_state == current_state:
 		return
-
 
 	current_state = new_state
 	match current_state:
