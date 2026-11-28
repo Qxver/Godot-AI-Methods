@@ -42,19 +42,17 @@ var _placed_positions: Array = []
 var _player_start: Vector2 = Vector2(-9999, -9999)
 
 
+# Initialise the RNG, fetch the player's position, and spawn all objects
 func _ready() -> void:
-	# Seed the RNG
 	if random_seed != 0:
 		_rng.seed = random_seed
 	else:
 		_rng.randomize()
 
-	# Try to find the player so we can keep a clear zone around it
 	var players := get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		_player_start = (players[0] as Node2D).global_position
 
-	# Spawn all object types
 	_spawn_batch(rock_scene,           rock_count,           "Rocks")
 	_spawn_batch(tree_scene,           tree_count,           "Trees")
 	_spawn_batch(fence_scene,          fence_count,          "Fences")
@@ -63,8 +61,7 @@ func _ready() -> void:
 	spawning_done.emit()
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
+# Create a container for object type and instantiate the given number of object at valid random positions
 func _spawn_batch(scene: PackedScene, count: int, group_name: String) -> void:
 	if scene == null:
 		push_warning("ProceduralSpawner: scene for '%s' is not set." % group_name)
@@ -99,9 +96,10 @@ func _spawn_batch(scene: PackedScene, count: int, group_name: String) -> void:
 		_placed_positions.append(pos)
 		spawned += 1
 
-	print("ProceduralSpawner: placed %d / %d %s." % [spawned, count, group_name])
+	# print("ProceduralSpawner: placed %d / %d %s." % [spawned, count, group_name])
 
 
+# Search for a random position that has valid distance between objects; returns INF on failure.
 func _find_valid_position() -> Vector2:
 	for _attempt in range(max_attempts):
 		var candidate := Vector2(
@@ -109,11 +107,9 @@ func _find_valid_position() -> Vector2:
 			_rng.randf_range(world_rect.position.y, world_rect.end.y)
 		)
 
-		# Check distance from player start
 		if candidate.distance_to(_player_start) < min_distance_from_player:
 			continue
 
-		# Check distance from every already-placed object
 		var too_close := false
 		for placed in _placed_positions:
 			if candidate.distance_to(placed) < min_distance_between_objects:
@@ -123,4 +119,4 @@ func _find_valid_position() -> Vector2:
 		if not too_close:
 			return candidate
 
-	return Vector2.INF  # signal failure
+	return Vector2.INF

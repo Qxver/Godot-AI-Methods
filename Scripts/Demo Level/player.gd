@@ -21,6 +21,7 @@ const HIT_FLASH_DURATION: float = 0.15
 signal died
 signal hp_changed(new_hp: int, max_hp: int)
 
+# Initialise HP, attack animation, add the player to its group
 func _ready() -> void:
 	current_hp = max_hp
 	add_to_group("Player")
@@ -30,6 +31,7 @@ func _ready() -> void:
 		animated_sprite.sprite_frames.set_animation_loop(anim, false)
 	animated_sprite.animation_finished.connect(_on_attack_animation_finished)
 
+# Hit-flash effect, player movement, attack input
 func _physics_process(delta: float) -> void:
 	if _hit_flash_timer > 0.0:
 		_hit_flash_timer -= delta
@@ -59,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		_perform_attack()
 
+# Lock movement, play the attack animation and deal damage to enemies in range
 func _perform_attack() -> void:
 	is_attacking = true
 	_play_attack_animation()
@@ -73,12 +76,12 @@ func _perform_attack() -> void:
 		var dist: float = to_enemy.length()
 		if dist > attack_range:
 			continue
-		# Dot product: 1.0 = wprost przed graczem, 0.0 = bok, -1.0 = plecy
-		# Próg 0.3 ≈ łuk ~120° przed graczem (cos(72°) ≈ 0.3)
+			
 		var dot := facing.dot(to_enemy.normalized())
 		if dot >= 0.3:
 			enemy.take_damage(attack_damage)
 
+# Ends the attack state and restores the idle animation after the attack animation finishes
 func _on_attack_animation_finished() -> void:
 	var current_anim: String = animated_sprite.animation
 	if current_anim in ["AttackDown", "AttackRight", "AttackUp"]:
@@ -86,6 +89,7 @@ func _on_attack_animation_finished() -> void:
 		animated_sprite.speed_scale = 1.0
 		_play_idle_animation()
 
+# Switch between walk and idle animation based on the movement direction
 func _update_animation(direction: Vector2) -> void:
 	if direction == Vector2.ZERO:
 		_play_idle_animation()
@@ -93,6 +97,7 @@ func _update_animation(direction: Vector2) -> void:
 		last_direction = direction
 		_play_walk_animation(direction)
 
+# Plays the directional attack animation matched to the player facing direction
 func _play_attack_animation() -> void:
 	animated_sprite.speed_scale = attack_speed_scale
 	if abs(last_direction.x) >= abs(last_direction.y):
@@ -105,6 +110,7 @@ func _play_attack_animation() -> void:
 		animated_sprite.flip_h = false
 		animated_sprite.play("AttackDown")
 
+# Plays the walk animation based on the facing direction
 func _play_walk_animation(direction: Vector2) -> void:
 	if abs(direction.x) >= abs(direction.y):
 		animated_sprite.flip_h = direction.x < 0
@@ -116,6 +122,7 @@ func _play_walk_animation(direction: Vector2) -> void:
 		animated_sprite.flip_h = false
 		animated_sprite.play("WalkDown")
 
+# Plays the idle animation based on the facing direction
 func _play_idle_animation() -> void:
 	if abs(last_direction.x) >= abs(last_direction.y):
 		animated_sprite.flip_h = last_direction.x < 0
@@ -127,6 +134,7 @@ func _play_idle_animation() -> void:
 		animated_sprite.flip_h = false
 		animated_sprite.play("Idle")
 
+# Subtract damage from HP, trigger the hit-flash effect and die at 0 HP
 func take_damage(amount: int) -> void:
 	if is_dead:
 		return
@@ -144,6 +152,7 @@ func take_damage(amount: int) -> void:
 
 
 
+# Set the player as dead, stop movement, emit died signal
 func _die() -> void:
 	is_dead = true
 	is_attacking = false
